@@ -1,15 +1,56 @@
 <template name="dashboard">
     <div class="template-dashboard">
         <div class="page-header">
-            <h1>Hale Aloha Dashboard</h1>
+            <h1>Hale Aloha</h1>
         </div>
 
         <div class="row">
             <div class="col-md-6">
-                <h4>Ilima</h4>
+                <h4>Ilima Tower</h4>
                 {{> tower tower="ilima"}}
             </div>
+          <div class="col-md-6">
+            <h4>Lehua Tower</h4>
+            {{> tower tower="lehua"}}
+          </div>
         </div>
-
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Lokelani Tower</h4>
+          {{> tower tower="lokelani"}}
+        </div>
+        <div class="col-md-6">
+          <h4>Mokihana Tower</h4>
+          {{> tower tower="mokihana"}}
+        </div>
+      </div>
     </div>
+  <div id="visualization"></div>
+  <script type="text/javascript">
+
+
+    var container = document.getElementById('visualization');
+    var items = [
+      {x: '2014-06-11', y: 10},
+      {x: '2014-06-12', y: 25},
+      {x: '2014-06-13', y: 30},
+      {x: '2014-06-14', y: 10},
+      {x: '2014-06-15', y: 15},
+      {x: '2014-06-16', y: 30}
+    ];
+
+    var dataset = new vis.DataSet(items);
+    var options = {
+      style:'bar',
+      barChart: {width:50, align:'center'}, // align: left, center, right
+      drawPoints: false,
+      dataAxis: {
+        icons:true
+      },
+      orientation:'top',
+      start: '2014-06-10',
+      end: '2014-06-18'
+    };
+    var graph2d = new vis.Graph2d(container, items, options);
+  </script>
 </template>
