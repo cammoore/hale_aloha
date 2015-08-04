@@ -1,10 +1,11 @@
-Router.route('/', {
-  name: 'home'
+Router.route('dashboard', {
+  path: '/',
+  controller: 'DashboardController'
 });
 
-Router.route('/dashboard', {
-  name: 'dashboard',
-  controller: 'DashboardController'
+Router.route('/status', {
+  name: 'status',
+  controller: 'StatusController'
 });
 
 Router.plugin('ensureSignedIn', {

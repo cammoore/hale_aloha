@@ -1,0 +1,28 @@
+<template name="status">
+  <div class="template-dashboard">
+    <div class="page-header">
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Ilima Tower</h4>
+        {{> sensorStatus tower="ilima"}}
+      </div>
+      <div class="col-md-6">
+        <h4>Lehua Tower</h4>
+        {{> sensorStatus tower="lehua"}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Lokelani Tower</h4>
+        {{> sensorStatus tower="lokelani"}}
+      </div>
+      <div class="col-md-6">
+        <h4>Mokihana Tower</h4>
+        {{> sensorStatus tower="mokihana"}}
+      </div>
+    </div>
+  </div>
+</template>
