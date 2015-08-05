@@ -1,4 +1,4 @@
-Template.power.helpers({
+Template.powerMeter.helpers({
   //add you helpers here
   currentPower: function(towerId) {
     var current = Power.find({"tower": towerId, "lounge": {$exists: false}}, {sort: {createdAt: -1}, limit: 1}).fetch();
@@ -7,19 +7,19 @@ Template.power.helpers({
   }
 });
 
-Template.power.events({
+Template.powerMeter.events({
   //add your events here
 });
 
-Template.power.onCreated(function () {
+Template.powerMeter.onCreated(function () {
   //add your statement here
 });
 
-Template.power.onRendered(function () {
+Template.powerMeter.onRendered(function () {
   //add your statement here
 });
 
-Template.power.onDestroyed(function () {
+Template.powerMeter.onDestroyed(function () {
   //add your statement here
 });
 

@@ -1,16 +1,16 @@
-DashboardController = AppController.extend({
+HeatMapController = AppController.extend({
   waitOn: function() {
     return this.subscribe('daily');
   },
   data: {
-    items: Items.find({})
+    daily: Daily.find({})
   },
   onAfterAction: function () {
-    Meta.setTitle('Dashboard');
+    Meta.setTitle('Heat Map');
   }
 });
 
-DashboardController.events({
+HeatMapController.events({
   'click [data-action=doSomething]': function (event, template) {
     event.preventDefault();
   }

@@ -1,0 +1,30 @@
+<template name="towerHeatMap">
+    <div class="thumbnail">
+        <div class="row">
+            <div id="{{tower}}" class="col-md-12">
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="active"><a href="#{{tower}}_yearly" data-toggle="tab">Last 12 Months</a></li>
+                    <li role="presentation"><a href="#{{tower}}_monthly" data-toggle="tab">Last 30 days</a></li>
+                    <li role="presentation"><a href="#{{tower}}_daily" data-toggle="tab">Last 24 hours</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="{{tower}}_yearly" class="tab-pane active">{{tower}}'s energy use for the last year by month.
+                        <div id="{{tower}}last12_chart">
+                          <!--{{> last12 towerId=tower }}-->
+                        </div>
+                    </div>
+                    <div id="{{tower}}_monthly" class="tab-pane">{{tower}}'s energy use for the last month by day.
+                        <div id="{{tower}}last30_chart">
+                          <!--{{> last30 towerId=tower }}-->
+                        </div>
+                    </div>
+                    <div id="{{tower}}_daily" class="tab-pane">{{tower}}'s energy use for the last day by hour.
+                        <div id="{{tower}}last24_chart">
+                          <!--{{> last24 towerId=tower }}-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

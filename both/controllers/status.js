@@ -3,10 +3,9 @@
  */
 StatusController = AppController.extend({
   waitOn: function() {
-    return this.subscribe('items');
+    return this.subscribe('status');
   },
   data: {
-    items: Items.find({})
   },
   onAfterAction: function () {
     Meta.setTitle('Sensor Status');
