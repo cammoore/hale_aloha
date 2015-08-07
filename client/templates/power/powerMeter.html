@@ -1,3 +1,17 @@
 <template name="powerMeter">
-  Current power is {{ currentPower tower }}
+
+    As of {{ asOf tower}} {{ reporting tower }} meters of {{ meters tower}} are sending data.<br>
+    Baseline Value: {{ avePowerValue tower }} Watts<br>
+
+    <div id="gauge{{tower}}" ></div>
+    <script>
+        g{{tower}} = new JustGage({
+            id: "gauge{{tower}}",
+            value: {{ currentPowerValue tower }},
+            min: {{ minPowerValue tower }},
+            max: {{ maxPowerValue tower }},
+            title: "Current Power (W)",
+            refreshAnimationTime: 1
+        });
+    </script>
 </template>
