@@ -8,26 +8,71 @@ Template.powerMeter.helpers({
       limit: 1
     }).fetch();
     var cur = Math.floor(current[0].value);
-    console.log("current power = " + cur);
+    var min = Math.floor(current[0].minimum);
+    var max = Math.floor(current[0].maximum);
     if (towerId === "ilima") {
       if (typeof gilima != "undefined") {
-        console.log(typeof gilima);
-        gilima.refresh(cur);
+        if (document.getElementById("gaugeilima")) {
+          $("#gaugeilima").empty();
+          //gilima.refresh(cur);
+          gilima = new JustGage({
+            id: "gaugeilima",
+            value: cur,
+            min: min,
+            max: max,
+            title: "Current Power (W)",
+            refreshAnimationTime: 1
+          });
+        }
       }
     }
     else if (towerId === "lehua") {
       if (typeof glehua != "undefined") {
-        glehua.refresh(cur);
+        if (document.getElementById("gaugelehua")) {
+          //        glehua.refresh(cur);
+          $("#gaugelehua").empty();
+          glehua = new JustGage({
+            id: "gaugelehua",
+            value: cur,
+            min: min,
+            max: max,
+            title: "Current Power (W)",
+            refreshAnimationTime: 1
+          });
+        }
       }
     }
     else if (towerId === "lokelani") {
       if (typeof glokelani != "undefined") {
-        glokelani.refresh(cur);
+        if (document.getElementById("gaugelokelani")) {
+          //glokelani.refresh(cur);
+          $("#gaugelokelani").empty();
+          glehua = new JustGage({
+            id: "gaugelokelani",
+            value: cur,
+            min: min,
+            max: max,
+            title: "Current Power (W)",
+            refreshAnimationTime: 1
+          });
+        }
       }
     }
     else if (towerId === "mokihana") {
       if (typeof gmokihana != "undefined") {
-        gmokihana.refresh(cur);
+        if (document.getElementById("gaugemokihana")) {
+
+//        gmokihana.refresh(cur);
+          $("#gaugemokihana").empty();
+          glehua = new JustGage({
+            id: "gaugemokihana",
+            value: cur,
+            min: min,
+            max: max,
+            title: "Current Power (W)",
+            refreshAnimationTime: 1
+          });
+        }
       }
     }
     return cur;
@@ -73,7 +118,7 @@ Template.powerMeter.helpers({
       sort: {createdAt: -1},
       limit: 1
     }).fetch();
-    return moment(current[0].timestamp).format();
+    return moment(current[0].timestamp).format("MM/DD/YY hh:mm:ss a");
   },
   meters: function (towerId) {
     var current = Power.find({"tower": towerId, "lounge": {$exists: false}}, {
@@ -87,7 +132,21 @@ Template.powerMeter.helpers({
       sort: {createdAt: -1},
       limit: 1
     }).fetch();
-    return current[0].reporting;
+    var numReporting = current[0].reporting
+    var id = "#" + towerId + "reporting"
+    var elem = $(id);
+    //console.log(elem);
+    if (numReporting == 10) {
+      elem.addClass("text-success");
+    }
+    else if (numReporting > 7) {
+      elem.addClass("text-warning");
+    }
+    else {
+      elem.addClass("text-danger");
+    }
+    //elem.
+    return numReporting;
   }
 });
 
@@ -100,18 +159,69 @@ Template.powerMeter.onCreated(function () {
 });
 
 Template.powerMeter.onRendered(function () {
-    var tower = this.data.tower;
-    console.log("rendered " + tower);
-//add your statement here
-//var current = Power.find({"tower": towerId, "lounge": {$exists: false}}, {sort: {createdAt: -1}, limit: 1}).fetch();
-//var powerTable = new google.visualization.DataTable();
-//var numPowerTableRows = 1;
-//powerTable.addColumn('date'); // the time of day.
-//powerTable.addColumn('number'); // the power in Wh.
-//powerTable.addColumn('number'); // the baseline power in Wh.
-//powerTable.addRows(numPowerTableRows);
-//var timestampVal = current[0].createdAt;
-//var powerVal = Math.floor(current[0].value);
+  var tower = this.data.tower;
+  var current = Power.find({"tower": tower, "lounge": {$exists: false}}, {
+    sort: {createdAt: -1},
+    limit: 1
+  }).fetch();
+  var numReporting = current[0].reporting;
+  //console.log("reporting = " + numReporting);
+  if (tower === "ilima") {
+    //console.log(numReporting == 10);
+    if (numReporting === 10) {
+      //console.log("good");
+      $("#ilimareporting").addClass("success");
+    }
+    else if (numReporting > 7) {
+      //console.log("ok");
+      $("#ilimareporting").addClass("warning");
+    }
+    else {
+      $("#ilimareporting").addClass("danger");
+    }
+  }
+  if (tower === "lehua") {
+    //console.log(numReporting == 10);
+    if (numReporting === 10) {
+      //console.log("good");
+      $("#lehuareporting").addClass("success");
+    }
+    else if (numReporting > 7) {
+      //console.log("ok");
+      $("#lehuareporting").addClass("warning");
+    }
+    else {
+      $("#lehuareporting").addClass("danger");
+    }
+  }
+  if (tower === "lokelani") {
+    //console.log(numReporting == 10);
+    if (numReporting === 10) {
+      //console.log("good");
+      $("#lokelanireporting").addClass("success");
+    }
+    else if (numReporting > 7) {
+      //console.log("ok");
+      $("#lokelanireporting").addClass("warning");
+    }
+    else {
+      $("#lokelanireporting").addClass("danger");
+    }
+  }
+  if (tower === "mokihana") {
+    //console.log(numReporting == 10);
+    if (numReporting === 10) {
+      //console.log("good");
+      $("#mokihanareporting").addClass("success");
+    }
+    else if (numReporting > 7) {
+      //console.log("ok");
+      $("#mokihanareporting").addClass("warning");
+    }
+    else {
+      $("#mokihanareporting").addClass("danger");
+    }
+  }
 })
 ;
 

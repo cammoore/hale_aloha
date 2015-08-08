@@ -1,9 +1,17 @@
 <template name="powerMeter">
-
-    As of {{ asOf tower}} {{ reporting tower }} meters of {{ meters tower}} are sending data.<br>
-    Baseline Value: {{ avePowerValue tower }} Watts<br>
-
-    <div id="gauge{{tower}}" ></div>
+  <!--<div class="thumbnail">-->
+  <div class="row">
+   <div class="col-md-2 col-md-offset-5"><h4 class="text-capitalize" style="text-align: center">{{tower}}</h4></div>
+  </div>
+   <div id="gauge{{tower}}" ></div>
+    <table class="table-condensed small table-responsive" style="margin: 0 auto">
+      <tbody>
+      <tr id="{{tower}}reporting"><td>Meters Reporting: </td><td>{{reporting tower}}/{{meters tower}}</td></tr>
+      <tr><td>Last Updated: </td><td>{{asOf tower}}</td></tr>
+      <tr><td>Historical Average: </td><td>{{avePowerValue tower}} Watts</td></tr>
+      </tbody>
+    </table>
+  <!--</div>-->
     <script>
         g{{tower}} = new JustGage({
             id: "gauge{{tower}}",
