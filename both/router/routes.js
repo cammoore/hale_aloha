@@ -1,5 +1,10 @@
-Router.route('power', {
+Router.route('home', {
   path: '/',
+  controller: 'HomeController'
+})
+
+Router.route('power', {
+  path: '/power',
   controller: 'PowerController'
 });
 
@@ -24,5 +29,5 @@ Router.route('/status', {
 });
 
 Router.plugin('ensureSignedIn', {
-  only: ['dashboard', 'power', 'status']
+  only: ['power', 'heatmap', 'notifications', 'status']
 });
