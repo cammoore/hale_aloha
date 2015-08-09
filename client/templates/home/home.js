@@ -1,5 +1,16 @@
 Template.home.helpers({
   //add you helpers here
+  loggedIn: function() {
+    var user = Meteor.user();
+    if (user) {
+      return true;
+    }
+    return false;
+  },
+  goToPower: function() {
+    Router.go('/power');
+    window.location.reload();
+  }
 });
 
 Template.home.events({

@@ -5,6 +5,7 @@ Router.route('home', {
 
 Router.route('power', {
   path: '/power',
+  template: 'power',
   controller: 'PowerController'
 });
 
