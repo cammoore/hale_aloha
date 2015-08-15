@@ -1,3 +1,0 @@
-Template.usage.rendered = function() {
-
-};

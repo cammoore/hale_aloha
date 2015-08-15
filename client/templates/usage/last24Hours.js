@@ -1,9 +1,12 @@
-Template.last12.helpers({
+/**
+ * Created by carletonmoore on 8/3/15.
+ */
+Template.last24Hours.helpers({
   //add you helpers here
   byTower: function (towerId) {
-    console.log(towerId);
-    var records = Monthly.find({"tower": towerId}).fetch();
-    console.log(records);
+    //console.log(towerId);
+    var records = Hourly.find({"tower": towerId}).fetch();
+    //console.log(records);
 
   },
   parentHelper: function (parentContext) {
@@ -12,28 +15,34 @@ Template.last12.helpers({
   }
 });
 
-Template.last12.events({
+Template.last24Hours.events({
   //add your events here
 });
 
-Template.last12.onCreated(function () {
+Template.last24Hours.onCreated(function () {
   //add your statement here
 });
 
-Template.last12.onRendered(function () {
-  //add your statement here
+Template.last24Hours.onRendered(function () {
+  console.log("last24.onRendered");
   var towerId = this.data.towerId;
   //console.log(towerId);
-  var records = Monthly.find({"tower": towerId, "lounge": {$exists: false}}, {fields: {value: 1, date: 1}}).fetch();
+  var records = Hourly.find({"tower": towerId, "lounge": {$exists: false}}, {fields: {value: 1, date: 1}}).fetch();
   //console.log(records);
-  var container = document.getElementById(towerId + 'Last12Chart');
-  var barWidth = container.clientWidth / 12;
+
+  var container = document.getElementById(towerId + 'Last24HoursChart');
+  //console.log(container);
+  var barWidth = document.getElementById(towerId).clientWidth / 12;
   var items = [];
   var i;
-  for (i = 0; i < records.length; i++) {
+  var limit = records.length;
+  if (limit > 24) {
+    limit = 24;
+  }
+  for (i = 0; i < limit; i++) {
     var item = {};
     item.x = records[i].date;
-    item.y = records[i].value / 1000;
+    item.y = records[i].value;
     items.push(item);
   }
   //console.log(items);
@@ -73,15 +82,13 @@ Template.last12.onRendered(function () {
         },
       }
     },
-    orientation: 'top',
-    start: '2014-06-30'
+    orientation: 'top'
   };
-  var graph2d = new vis.Graph2d(container, items, options);
+  new vis.Graph2d(container, items, options);
 
-})
-;
+});
 
-Template.last12.onDestroyed(function () {
+Template.last24Hours.onDestroyed(function () {
   //add your statement here
 });
 

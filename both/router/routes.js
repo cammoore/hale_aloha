@@ -9,18 +9,23 @@ Router.route('power', {
   controller: 'PowerController'
 });
 
-Router.route('usage', {
-  path: '/usage',
-  controller: 'UsageController'
+Router.route('pastUsage', {
+  path: '/pastUsage',
+  controller: 'PastUsageController'
 });
 
-Router.route('heatmap', {
-  path: '/heatmap',
-  controller: 'HeatMapController'
-})
+Router.route('futureUsage', {
+  path: '/futureUsage',
+  controller: 'FutureUsageController'
+});
 
-Router.route('notifications', {
-  path: '/notifications',
+//Router.route('heatmap', {
+//  path: '/heatmap',
+//  controller: 'HeatMapController'
+//})
+
+Router.route('alerts', {
+  path: '/alerts',
   controller: 'NotificationsController'
 })
 
@@ -30,5 +35,5 @@ Router.route('/status', {
 });
 
 Router.plugin('ensureSignedIn', {
-  only: ['power', 'heatmap', 'notifications', 'status']
+  only: ['power', 'pastUsage', 'futureUsage', 'alerts', 'status']
 });

@@ -1,11 +1,7 @@
-/**
- * Created by carletonmoore on 8/3/15.
- */
-Template.last24.helpers({
-  //add you helpers here
+Template.last7Days.helpers({
   byTower: function (towerId) {
     console.log(towerId);
-    var records = Daily.find({"tower": towerId}).fetch();
+    var records = Monthly.find({"tower": towerId}).fetch();
     console.log(records);
 
   },
@@ -15,31 +11,32 @@ Template.last24.helpers({
   }
 });
 
-Template.last24.events({
+Template.last7Days.events({
   //add your events here
 });
 
-Template.last24.onCreated(function () {
+Template.last7Days.onCreated(function () {
   //add your statement here
 });
 
-Template.last24.onRendered(function () {
+Template.last7Days.onRendered(function () {
   var towerId = this.data.towerId;
   //console.log(towerId);
-  var records = Hourly.find({"tower": towerId, "lounge": {$exists: false}}, {fields: {value: 1, date: 1}}).fetch();
+  var records = Daily.find({"tower": towerId, "lounge": {$exists: false}}, {fields: {value: 1, date: 1}}).fetch();
   //console.log(records);
 
-  var container = document.getElementById(towerId + 'Last24Chart');
+  var container = document.getElementById(towerId + 'Last7DaysChart');
   var barWidth = document.getElementById(towerId).clientWidth / 12;
   var items = [];
   var i;
-  for (i = 0; i < records.length; i++) {
+  var limit = records.length - 8;
+  for (i = records.length -1; i > limit; i--) {
     var item = {};
     item.x = records[i].date;
     item.y = records[i].value;
     items.push(item);
   }
-  console.log(items);
+  //console.log(items);
   var dataset = new vis.DataSet(items);
   var options = {
     style: 'bar',
@@ -47,18 +44,24 @@ Template.last24.onRendered(function () {
     drawPoints: false,
     dataAxis: {
       icons: true,
+      visible: true,
+      showMajorLabels: true,
+      showMinorLabels: false,
       range: {
         max: 22000,
         min: 0
       },
       format: function (value) {
         var reduced = value / 1000;
-        return reduced + " kW";
+        return reduced;
       },
       left: {
+        title: {
+          text: "KiloWatts"
+        },
         format: function (value) {
           var reduced = value / 1000;
-          return reduced + " kW";
+          return reduced;
         },
         range: {
           max: 22000,
@@ -68,7 +71,7 @@ Template.last24.onRendered(function () {
       right: {
         format: function (value) {
           var reduced = value / 1000;
-          return reduced + " kW";
+          return reduced;
         },
         range: {
           max: 22000,
@@ -79,10 +82,9 @@ Template.last24.onRendered(function () {
     orientation: 'top'
   };
   new vis.Graph2d(container, items, options);
-
 });
 
-Template.last24.onDestroyed(function () {
+Template.last7Days.onDestroyed(function () {
   //add your statement here
 });
 

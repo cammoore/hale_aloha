@@ -1,9 +1,7 @@
-Template.last30.helpers({
+Template.last30Days.helpers({
   //add you helpers here
   byTower: function (towerId) {
-    console.log(towerId);
-    var records = Monthly.find({"tower": towerId}).fetch();
-    console.log(records);
+    var records = Daily.find({"tower": towerId}).fetch();
 
   },
   parentHelper: function (parentContext) {
@@ -12,31 +10,35 @@ Template.last30.helpers({
   }
 });
 
-Template.last30.events({
+Template.last30Days.events({
   //add your events here
 });
 
-Template.last30.onCreated(function () {
+Template.last30Days.onCreated(function () {
   //add your statement here
 });
 
-Template.last30.onRendered(function () {
+Template.last30Days.onRendered(function () {
   var towerId = this.data.towerId;
   //console.log(towerId);
   var records = Daily.find({"tower": towerId, "lounge": {$exists: false}}, {fields: {value: 1, date: 1}}).fetch();
   //console.log(records);
 
-  var container = document.getElementById(towerId + 'Last30Chart');
+  var container = document.getElementById(towerId + 'Last30DaysChart');
   var barWidth = document.getElementById(towerId).clientWidth / 12;
   var items = [];
   var i;
-  for (i = 0; i < records.length; i++) {
+  var limit = records.length;
+  if (limit > 30) {
+    limit = 30;
+  }
+  for (i = 0; i < limit; i++) {
     var item = {};
     item.x = records[i].date;
     item.y = records[i].value;
     items.push(item);
   }
-  console.log(items);
+  //console.log(items);
   var dataset = new vis.DataSet(items);
   var options = {
     style: 'bar',
@@ -85,7 +87,7 @@ Template.last30.onRendered(function () {
 });
 
 
-Template.last30.onDestroyed(function () {
+Template.last30Days.onDestroyed(function () {
   //add your statement here
 });
 

@@ -1,15 +1,15 @@
-UsageController = AppController.extend({
+PastUsageController = AppController.extend({
   waitOn: function() {
     return this.subscribe('daily');
   },
   data: {
   },
   onAfterAction: function () {
-    Meta.setTitle('Usage');
+    Meta.setTitle('Past Usage');
   }
 });
 
-UsageController.events({
+PastUsageController.events({
   'click [data-action=doSomething]': function (event, template) {
     event.preventDefault();
   }

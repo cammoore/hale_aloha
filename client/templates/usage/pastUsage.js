@@ -1,0 +1,3 @@
+Template.pastUsage.rendered = function() {
+
+};
