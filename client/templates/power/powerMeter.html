@@ -11,15 +11,5 @@
       <tr><td>Historical Average: </td><td>{{avePowerValue tower}} Watts</td></tr>
       </tbody>
     </table>
-  <!--</div>-->
-    <script>
-        g{{tower}} = new JustGage({
-            id: "gauge{{tower}}",
-            value: {{ currentPowerValue tower }},
-            min: {{ minPowerValue tower }},
-            max: {{ maxPowerValue tower }},
-            title: "Current Power (W)",
-            refreshAnimationTime: 1
-        });
-    </script>
+  {{ initPowerUpdate tower }}
 </template>

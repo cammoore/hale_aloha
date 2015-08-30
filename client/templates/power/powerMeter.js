@@ -1,8 +1,7 @@
-//google.load("visualization", "1", {packages:['corechart', 'imagechart']});
+powerMetersReady = false;
 
 Template.powerMeter.helpers({
-  //add you helpers here
-  currentPowerValue: function (towerId, element) {
+  initPowerUpdate: function (towerId, element) {
     var current = Power.find({"tower": towerId, "lounge": {$exists: false}}, {
       sort: {createdAt: -1},
       limit: 1
@@ -11,27 +10,23 @@ Template.powerMeter.helpers({
     var min = Math.floor(current[0].minimum);
     var max = Math.floor(current[0].maximum);
     if (towerId === "ilima") {
-      if (typeof gilima != "undefined") {
-        if (document.getElementById("gaugeilima")) {
-          $("#gaugeilima").empty();
-          //gilima.refresh(cur);
-          gilima = new JustGage({
-            id: "gaugeilima",
-            value: cur,
-            min: min,
-            max: max,
-            title: "Current Power (W)",
-            refreshAnimationTime: 1
-          });
-        }
+      if (document.getElementById("gaugeilima")) {
+        $("#gaugeilima").empty();
+        new JustGage({
+          id: "gaugeilima",
+          value: cur,
+          min: min,
+          max: max,
+          title: "Current Power (W)",
+          refreshAnimationTime: 1
+        });
       }
     }
     else if (towerId === "lehua") {
       if (typeof glehua != "undefined") {
         if (document.getElementById("gaugelehua")) {
-          //        glehua.refresh(cur);
           $("#gaugelehua").empty();
-          glehua = new JustGage({
+          new JustGage({
             id: "gaugelehua",
             value: cur,
             min: min,
@@ -47,7 +42,7 @@ Template.powerMeter.helpers({
         if (document.getElementById("gaugelokelani")) {
           //glokelani.refresh(cur);
           $("#gaugelokelani").empty();
-          glehua = new JustGage({
+          new JustGage({
             id: "gaugelokelani",
             value: cur,
             min: min,
@@ -61,10 +56,9 @@ Template.powerMeter.helpers({
     else if (towerId === "mokihana") {
       if (typeof gmokihana != "undefined") {
         if (document.getElementById("gaugemokihana")) {
-
 //        gmokihana.refresh(cur);
           $("#gaugemokihana").empty();
-          glehua = new JustGage({
+          new JustGage({
             id: "gaugemokihana",
             value: cur,
             min: min,
@@ -75,7 +69,6 @@ Template.powerMeter.helpers({
         }
       }
     }
-    return cur;
   },
   minPowerValue: function (towerId) {
     var current = Power.find({"tower": towerId, "lounge": {$exists: false}}, {
@@ -165,15 +158,23 @@ Template.powerMeter.onRendered(function () {
     limit: 1
   }).fetch();
   var numReporting = current[0].reporting;
+  var cur = Math.floor(current[0].value);
+  var min = Math.floor(current[0].minimum);
+  var max = Math.floor(current[0].maximum);
   //console.log("reporting = " + numReporting);
   if (tower === "ilima") {
-    //console.log(numReporting == 10);
+    new JustGage({
+      id: "gaugeilima",
+      value: cur,
+      min: min,
+      max: max,
+      title: "Current Power (W)",
+      refreshAnimationTime: 1
+    });
     if (numReporting === 10) {
-      //console.log("good");
       $("#ilimareporting").addClass("success");
     }
     else if (numReporting > 7) {
-      //console.log("ok");
       $("#ilimareporting").addClass("warning");
     }
     else {
@@ -181,13 +182,18 @@ Template.powerMeter.onRendered(function () {
     }
   }
   if (tower === "lehua") {
-    //console.log(numReporting == 10);
+    new JustGage({
+      id: "gaugelehua",
+      value: cur,
+      min: min,
+      max: max,
+      title: "Current Power (W)",
+      refreshAnimationTime: 1
+    });
     if (numReporting === 10) {
-      //console.log("good");
       $("#lehuareporting").addClass("success");
     }
     else if (numReporting > 7) {
-      //console.log("ok");
       $("#lehuareporting").addClass("warning");
     }
     else {
@@ -195,13 +201,18 @@ Template.powerMeter.onRendered(function () {
     }
   }
   if (tower === "lokelani") {
-    //console.log(numReporting == 10);
+    new JustGage({
+      id: "gaugelokelani",
+      value: cur,
+      min: min,
+      max: max,
+      title: "Current Power (W)",
+      refreshAnimationTime: 1
+    });
     if (numReporting === 10) {
-      //console.log("good");
       $("#lokelanireporting").addClass("success");
     }
     else if (numReporting > 7) {
-      //console.log("ok");
       $("#lokelanireporting").addClass("warning");
     }
     else {
@@ -209,9 +220,15 @@ Template.powerMeter.onRendered(function () {
     }
   }
   if (tower === "mokihana") {
-    //console.log(numReporting == 10);
+    new JustGage({
+      id: "gaugemokihana",
+      value: cur,
+      min: min,
+      max: max,
+      title: "Current Power (W)",
+      refreshAnimationTime: 1
+    });
     if (numReporting === 10) {
-      //console.log("good");
       $("#mokihanareporting").addClass("success");
     }
     else if (numReporting > 7) {
@@ -222,8 +239,7 @@ Template.powerMeter.onRendered(function () {
       $("#mokihanareporting").addClass("danger");
     }
   }
-})
-;
+});
 
 Template.powerMeter.onDestroyed(function () {
   //add your statement here

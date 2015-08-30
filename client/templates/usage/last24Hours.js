@@ -5,7 +5,7 @@ Template.last24Hours.helpers({
   //add you helpers here
   byTower: function (towerId) {
     //console.log(towerId);
-    var records = Hourly.find({"tower": towerId}).fetch();
+    var records = Hourly.find({"tower": towerId}, {sort: {createdAt: -1}}).fetch();
     //console.log(records);
 
   },
@@ -24,10 +24,10 @@ Template.last24Hours.onCreated(function () {
 });
 
 Template.last24Hours.onRendered(function () {
-  console.log("last24.onRendered");
+  //console.log("last24.onRendered");
   var towerId = this.data.towerId;
   //console.log(towerId);
-  var records = Hourly.find({"tower": towerId, "lounge": {$exists: false}}, {fields: {value: 1, date: 1}}).fetch();
+  var records = Hourly.find({"tower": towerId, "lounge": {$exists: false}}, {sort: {createdAt: -1}}).fetch();
   //console.log(records);
 
   var container = document.getElementById(towerId + 'Last24HoursChart');
@@ -36,16 +36,18 @@ Template.last24Hours.onRendered(function () {
   var items = [];
   var i;
   var limit = records.length;
+  //console.log(limit);
   if (limit > 24) {
     limit = 24;
   }
+  //console.log(limit);
   for (i = 0; i < limit; i++) {
     var item = {};
     item.x = records[i].date;
     item.y = records[i].value;
     items.push(item);
   }
-  //console.log(items);
+  console.log(items);
   var dataset = new vis.DataSet(items);
   var options = {
     style: 'bar',

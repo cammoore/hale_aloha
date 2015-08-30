@@ -1,0 +1,22 @@
+<template name="expected">
+  <div class="thumbnail">
+    <div class="row">
+      <div id="{{tower}}" class="col-md-12">
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="#{{tower}}Next24hours" data-toggle="tab">Next 24
+            hours</a></li>
+          <li role="presentation"><a href="#{{tower}}Next7days" data-toggle="tab">Next 7 days</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="{{tower}}Next24hours" class="tab-pane active">{{tower}}'s predicted energy use for the next 24 hours.
+            <!--<div id="{{tower}}last24_chart">-->
+              <!--{{> next24Hours towerId=tower }}-->
+            <!--</div>-->
+          </div>
+          {{> next7Days tower=tower }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</template>

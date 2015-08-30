@@ -1,0 +1,76 @@
+<template name="futureUsage">
+  <div class="template-futureUsage">
+    <style>
+
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      .box {
+        font: 10px sans-serif;
+      }
+
+      .box line,
+      .box rect,
+      .box circle {
+        fill: steelblue;
+        stroke: #000;
+        stroke-width: 1px;
+      }
+
+      .box .center {
+        stroke-dasharray: 3, 3;
+      }
+
+      .box .outlier {
+        fill: none;
+        stroke: #000;
+      }
+
+      .axis {
+        font: 12px sans-serif;
+      }
+
+      .axis path,
+      .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+      }
+
+      .x.axis path {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+      }
+
+    </style>
+    <div class="page-header">
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Ilima Tower</h4>
+        {{> expected tower="ilima"}}
+      </div>
+      <div class="col-md-6">
+        <h4>Lehua Tower</h4>
+        {{> expected tower="lehua"}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Lokelani Tower</h4>
+        {{> expected tower="lokelani"}}
+      </div>
+      <div class="col-md-6">
+        <h4>Mokihana Tower</h4>
+        {{> expected tower="mokihana"}}
+      </div>
+    </div>
+
+
+    <div class="whisker"></div>
+  </div>
+</template>

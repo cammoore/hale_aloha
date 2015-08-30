@@ -5,9 +5,12 @@ Template.sensorStatus.helpers({
     var i;
     for (i = 0; i < 10; i++) {
       var id = "" + statuses[i].sensorId;
-      console.log(id);
-      var element = document.getElementById(id);
-      console.log(element);
+      //console.log(id);
+      var element = $(id);
+      if (typeof element != "undefined") {
+        element.addClass(statuses[i].status);
+      }
+      //console.log(element);
     }
   }
 });

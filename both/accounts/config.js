@@ -1,14 +1,16 @@
 AccountsTemplates.configureRoute('signIn', {
-  redirect: function () {
-    var user = Meteor.user();
-    if (user) {
-      Router.go('/power');
-      window.location.reload();
-    }
-    else {
-      this.next();
-    }
-  },
+  redirect: '/power',
+
+  //    function () {
+  //  var user = Meteor.user();
+  //  if (user) {
+  //    Router.go('/power');
+  //    window.location.reload();
+  //  }
+  //  else {
+  //    this.next();
+  //  }
+  //},
   layoutTemplate: 'appLayout'
 });
 //AccountsTemplates.configureRoute('signIn', {layoutTemplate: 'signInLayout'});

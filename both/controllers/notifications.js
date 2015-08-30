@@ -6,7 +6,7 @@ NotificationsController = AppController.extend({
     notifications: Notifications.find({})
   },
   onAfterAction: function () {
-    Meta.setTitle('Notifications');
+    Meta.setTitle('Alerts');
   }
 });
 
