@@ -27,43 +27,51 @@ function predictNext7DaysEnergy(towerId) {
   var idString = "#" + towerId + "Next7_chart";
   var shortIdString = "#" + towerId;
   var width = $(shortIdString).width() - margin.left - margin.right;
-  //console.log("width = " + width);
-
   var height = 400 - margin.top - margin.bottom;
 
 
   var min = Infinity,
       max = -Infinity;
-  //console.log(document.querySelector(idString));
-  //console.log(d3.select(idString));
-  //console.log(towerId);
-  var records = PredictedHourly.find({tower: towerId}).fetch();
-  //console.log(records[0].values);
+  var records = PredictedDaily.find({tower: towerId}).fetch();
   // parse in the data
   var data = [];
-
-  // using an array of arrays with
-  // data[n][2]
-  // where n = number of columns in the csv file
-  // data[i][0] = name of the ith column
-  // data[i][1] = array of values of ith column
-
-  //console.log("csv");
-  //console.log(csv);
   data[0] = [];
-  //data[1] = [];
-  // add more rows if your csv file has more columns
+  data[1] = [];
+  data[2] = [];
+  data[3] = [];
+  data[4] = [];
+  data[5] = [];
+  data[6] = [];
 
-  // add here the header of the csv file
-  data[0][0] = records[0].createdAt;
-  //data[1][0] = "foo";
-  // add more rows if your csv file has more columns
+  data[0][0] = records[0].label;
+  data[1][0] = records[1].label;
+  data[2][0] = records[2].label;
+  data[3][0] = records[3].label;
+  data[4][0] = records[4].label;
+  data[5][0] = records[5].label;
+  data[6][0] = records[6].label;
 
   data[0][1] = records[0].values;
-  //data[1][1] = records[0].values;
+  data[1][1] = records[1].values;
+  data[2][1] = records[2].values;
+  data[3][1] = records[3].values;
+  data[4][1] = records[4].values;
+  data[5][1] = records[5].values;
+  data[6][1] = records[6].values;
 
-
-  //console.log(data);
+  // need to find min and max for the data.
+  var i = 0;
+  var j = 0;
+  for (i = 0; i < data.length; i++) {
+    for (j = 0; j < data[i][1].length; j++) {
+      if (max < data[i][1][j]) {
+        max = data[i][1][j];
+      }
+      if (min > data[i][1][j]) {
+        min = data[i][1][j];
+      }
+    }
+  }
 
   var chart = d3.box()
       .whiskers(iqr(1.5))
@@ -81,7 +89,6 @@ function predictNext7DaysEnergy(towerId) {
   // the x-axis
   var x = d3.scale.ordinal()
       .domain(data.map(function (d) {
-        //console.log(d);
         return d[0]
       }))
       .rangeRoundBands([0, width], 0.7, 0.3);
@@ -99,7 +106,6 @@ function predictNext7DaysEnergy(towerId) {
       .scale(y)
       .orient("left");
 
-  //console.log(data);
   // draw the boxplots
   svg.selectAll(".box")
       .data(data)
@@ -139,7 +145,7 @@ function predictNext7DaysEnergy(towerId) {
       .call(xAxis)
       .append("text")             // text label for the x axis
       .attr("x", (width / 2))
-      .attr("y", 10)
+      .attr("y", 17)
       .attr("dy", ".71em")
       .style("text-anchor", "middle")
       .style("font-size", "16px")
