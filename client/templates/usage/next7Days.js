@@ -33,34 +33,46 @@ function predictNext7DaysEnergy(towerId) {
   var min = Infinity,
       max = -Infinity;
   var records = PredictedDaily.find({tower: towerId}).fetch();
+  var numRecords = records.length - 1;
+
+  //console.log(numRecords);
   // parse in the data
   var data = [];
-  data[0] = [];
-  data[1] = [];
-  data[2] = [];
-  data[3] = [];
-  data[4] = [];
-  data[5] = [];
-  data[6] = [];
-
-  data[0][0] = records[0].label;
-  data[1][0] = records[1].label;
-  data[2][0] = records[2].label;
-  data[3][0] = records[3].label;
-  data[4][0] = records[4].label;
-  data[5][0] = records[5].label;
-  data[6][0] = records[6].label;
-
-  data[0][1] = records[0].values;
-  data[1][1] = records[1].values;
-  data[2][1] = records[2].values;
-  data[3][1] = records[3].values;
-  data[4][1] = records[4].values;
-  data[5][1] = records[5].values;
-  data[6][1] = records[6].values;
+  var i = 0;
+  for (i = 0; i < 7; i++) {
+    //console.log("i = " + i);
+    data[i] = [];
+    var record = records[numRecords - 7 + i];
+    //console.log(numRecords - 7 + i);
+    //console.log(record);
+    data[i][0] = record.label;
+    data[i][1] = record.values;
+  }
+  //data[0] = [];
+  //data[1] = [];
+  //data[2] = [];
+  //data[3] = [];
+  //data[4] = [];
+  //data[5] = [];
+  //data[6] = [];
+  //
+  //data[0][0] = records[0].label;
+  //data[1][0] = records[1].label;
+  //data[2][0] = records[2].label;
+  //data[3][0] = records[3].label;
+  //data[4][0] = records[4].label;
+  //data[5][0] = records[5].label;
+  //data[6][0] = records[6].label;
+  //
+  //data[0][1] = records[0].values;
+  //data[1][1] = records[1].values;
+  //data[2][1] = records[2].values;
+  //data[3][1] = records[3].values;
+  //data[4][1] = records[4].values;
+  //data[5][1] = records[5].values;
+  //data[6][1] = records[6].values;
 
   // need to find min and max for the data.
-  var i = 0;
   var j = 0;
   for (i = 0; i < data.length; i++) {
     for (j = 0; j < data[i][1].length; j++) {
