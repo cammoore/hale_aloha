@@ -47,7 +47,7 @@ Template.last24Hours.onRendered(function () {
     item.y = records[i].value;
     items.push(item);
   }
-  console.log(items);
+  //console.log(items);
   var dataset = new vis.DataSet(items);
   var options = {
     style: 'bar',

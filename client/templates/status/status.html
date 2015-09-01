@@ -1,7 +1,7 @@
 <template name="status">
   <div class="template-dashboard">
     <div class="page-header">
-
+<h4>Sensor status over the last week</h4>
     </div>
 
     <div class="row">
@@ -33,4 +33,16 @@
       </div>
     </div>
   </div>
+  <p></p>
+  <div class="row">
+    <div class="col-md-3">
+      <span class="label label-as-badge green">&nbsp;&nbsp;&nbsp;</span> &gt; 80% of expected measurements</div>
+    <div class="col-md-3">
+      <span class="label label-as-badge yellow">&nbsp;&nbsp;&nbsp;</span> 50% - 80% of expected measurements</div>
+    <div class="col-md-3">
+      <span class="label label-as-badge red">&nbsp;&nbsp;&nbsp;</span> &lt; 50% of expected measurements</div>
+    <div class="col-md-3">
+      <span class="label label-as-badge black">&nbsp;&nbsp;&nbsp;</span> no measurements</div>
+  </div>
+  <p></p>
 </template>
