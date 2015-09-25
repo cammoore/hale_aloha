@@ -6,6 +6,7 @@ Template.powerMeter.helpers({
       sort: {createdAt: -1},
       limit: 1
     }).fetch();
+    //console.log("initPowerUpdate");
     var cur = Math.floor(current[0].value);
     var min = Math.floor(current[0].minimum);
     var max = Math.floor(current[0].maximum);
@@ -134,7 +135,6 @@ Template.powerMeter.helpers({
     var numReporting = current[0].reporting
     var id = "#" + towerId + "reporting"
     var elem = $(id);
-    //console.log(elem);
     if (numReporting == 10) {
       elem.addClass("text-success");
     }
@@ -144,7 +144,6 @@ Template.powerMeter.helpers({
     else {
       elem.addClass("text-danger");
     }
-    //elem.
     return numReporting;
   }
 });
@@ -158,6 +157,7 @@ Template.powerMeter.onCreated(function () {
 });
 
 Template.powerMeter.onRendered(function () {
+  //console.log("onRendered");
   var tower = this.data.tower;
   var current = Power.find({"tower": tower, "lounge": {$exists: false}}, {
     sort: {createdAt: -1},
