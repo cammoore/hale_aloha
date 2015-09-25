@@ -9,6 +9,12 @@ Template.powerMeter.helpers({
     var cur = Math.floor(current[0].value);
     var min = Math.floor(current[0].minimum);
     var max = Math.floor(current[0].maximum);
+    if (cur < min) {
+      min = cur * 0.8;
+    }
+    if (cur > max) {
+      max = cur * 1.2;
+    }
     if (towerId === "ilima") {
       if (document.getElementById("gaugeilima")) {
         $("#gaugeilima").empty();
@@ -161,6 +167,12 @@ Template.powerMeter.onRendered(function () {
   var cur = Math.floor(current[0].value);
   var min = Math.floor(current[0].minimum);
   var max = Math.floor(current[0].maximum);
+  if (cur < min) {
+    min = cur * 0.8;
+  }
+  if (cur > max) {
+    max = cur * 1.2;
+  }
   //console.log("reporting = " + numReporting);
   if (tower === "ilima") {
     new JustGage({
