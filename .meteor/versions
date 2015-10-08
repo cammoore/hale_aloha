@@ -59,7 +59,7 @@ less@2.5.0_3
 livedata@1.0.15
 localstorage@1.0.5
 logging@1.0.8
-matb33:collection-hooks@0.8.0
+matb33:collection-hooks@0.8.1
 meteor@1.1.9
 meteor-base@1.0.1
 minifiers@1.1.7
@@ -86,7 +86,7 @@ routepolicy@1.0.6
 service-configuration@1.0.5
 session@1.1.1
 sha@1.0.4
-softwarerero:accounts-t9n@1.0.9
+softwarerero:accounts-t9n@1.1.4
 spacebars@1.0.7
 spacebars-compiler@1.0.7
 srp@1.0.4
@@ -96,7 +96,7 @@ templating-tools@1.0.0
 tracker@1.0.9
 ui@1.0.8
 underscore@1.0.4
-underscorestring:underscore.string@3.0.3_1
+underscorestring:underscore.string@3.2.2
 url@1.0.5
 useraccounts:bootstrap@1.12.3
 useraccounts:core@1.12.3

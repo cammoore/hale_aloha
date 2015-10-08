@@ -32,7 +32,7 @@ function predictNext24HoursEnergy(towerId) {
 
   var min = Infinity,
     max = -Infinity;
-  var records = PredictedHourly.find({tower: towerId}).fetch();
+  var records = PredictedHourly.find({tower: towerId}, {sort: {createdAt: 1}}).fetch();
   var numRecords = records.length - 1;
 
   // parse in the data
@@ -47,80 +47,6 @@ function predictNext24HoursEnergy(towerId) {
     data[i][0] = record.label;
     data[i][1] = record.values;
   }
-  //data[0] = [];
-  //data[1] = [];
-  //data[2] = [];
-  //data[3] = [];
-  //data[4] = [];
-  //data[5] = [];
-  //data[6] = [];
-  //data[7] = [];
-  //data[8] = [];
-  //data[9] = [];
-  //data[10] = [];
-  //data[11] = [];
-  //data[12] = [];
-  //data[13] = [];
-  //data[14] = [];
-  //data[15] = [];
-  //data[16] = [];
-  //data[17] = [];
-  //data[18] = [];
-  //data[19] = [];
-  //data[20] = [];
-  //data[21] = [];
-  //data[22] = [];
-  //data[23] = [];
-  //
-  //data[0][0] = records[0].label;
-  //data[1][0] = records[1].label;
-  //data[2][0] = records[2].label;
-  //data[3][0] = records[3].label;
-  //data[4][0] = records[4].label;
-  //data[5][0] = records[5].label;
-  //data[6][0] = records[6].label;
-  //data[7][0] = records[7].label;
-  //data[8][0] = records[8].label;
-  //data[9][0] = records[9].label;
-  //data[10][0] = records[10].label;
-  //data[11][0] = records[11].label;
-  //data[12][0] = records[12].label;
-  //data[13][0] = records[13].label;
-  //data[14][0] = records[14].label;
-  //data[15][0] = records[15].label;
-  //data[16][0] = records[16].label;
-  //data[17][0] = records[17].label;
-  //data[18][0] = records[18].label;
-  //data[19][0] = records[19].label;
-  //data[20][0] = records[20].label;
-  //data[21][0] = records[21].label;
-  //data[22][0] = records[22].label;
-  //data[23][0] = records[23].label;
-  //
-  //data[0][1] = records[0].values;
-  //data[1][1] = records[1].values;
-  //data[2][1] = records[2].values;
-  //data[3][1] = records[3].values;
-  //data[4][1] = records[4].values;
-  //data[5][1] = records[5].values;
-  //data[6][1] = records[6].values;
-  //data[7][1] = records[7].values;
-  //data[8][1] = records[8].values;
-  //data[9][1] = records[9].values;
-  //data[10][1] = records[10].values;
-  //data[11][1] = records[11].values;
-  //data[12][1] = records[12].values;
-  //data[13][1] = records[13].values;
-  //data[14][1] = records[14].values;
-  //data[15][1] = records[15].values;
-  //data[16][1] = records[16].values;
-  //data[17][1] = records[17].values;
-  //data[18][1] = records[18].values;
-  //data[19][1] = records[19].values;
-  //data[20][1] = records[20].values;
-  //data[21][1] = records[21].values;
-  //data[22][1] = records[22].values;
-  //data[23][1] = records[23].values;
 
   // need to find min and max for the data.
   var i = 0;
