@@ -1,134 +1,42 @@
-# meteor-boilerplate
+# Hale Aloha Energy Dashboard
 
-A starting point for MeteorJS applications. Includes iron-router, Bootstrap 3, Font Awesome, LESS and more.
+The Hale Aloha Energy Dashboard consists of three components.
 
-* [Included Packages](#included-packages)
-* [Installation](#installation)
-* [File Structure](#file-structure)
-* [Bootstrap and Less](#bootstrap-and-less)
-* [SEO](#seo)
-* [Favicons and Touch Icons](#favicons-and-touch-icons)
-* [Seed Data](#seed-data)
+  1. This Meteor Application
+  2. A Java data bridge applications
+  3. The [WattDepot energy system](http://wattdepot.org) monitoring the Hale Aloha dorms.
+  
+## Installation
 
-## <a name="included-packages"></a> Included Packages
+TODO: Describe the installation process
 
-* Collections:
-  * [dburles:collection-helpers](https://github.com/dburles/meteor-collection-helpers)
-  * [matb33:collection-hooks](https://github.com/matb33/meteor-collection-hooks)
-  * [reywood:publish-composite](https://github.com/englue/meteor-publish-composite)
-* Router:
-  * [iron:router](https://github.com/EventedMind/iron-router)
-  * [zimme:iron-router-active](https://github.com/zimme/meteor-iron-router-active)
-  * [yasinuslu:blaze-meta](https://github.com/yasinuslu/blaze-meta)
-* Authentication
-  * [splendido:accounts-templates-bootstrap](https://github.com/splendido/accounts-templates-bootstrap)
-  * [alanning:roles](https://github.com/alanning/meteor-roles)
-* Seed Data
-  * [dburles:factory](https://github.com/percolatestudio/meteor-factory)
-  * [anti:fake](https://github.com/anticoders/meteor-fake/)
-* [Less](http://lesscss.org)
-  * [Bootstrap](http://getbootstrap.com)
-  * [Font Awesome](http://fontawesome.io)
-* Misc:
-  * [Moment.js](http://momentjs.com/)
-  * [Underscore.js](http://underscorejs.org/)
-  * [Underscore.string](http://epeli.github.io/underscore.string/)
-  * [cunneen:mailgun](https://github.com/cunneen/meteor-mailgun)
+## Usage
 
-## <a name="installation"></a> Installation
+TODO: Write usage instructions
 
-1. Clone this repo to `<yourapp>`
+## Contributing
 
-  `git clone https://github.com/Differential/meteor-boilerplate.git <yourapp>`
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
 
-2. Remove `.git`
+## History
 
-  `cd <yourapp> && rm -rf .git`
+TODO: Write history
 
-3. Start coding!
+## Credits
 
-## <a name="file-structure"></a> File Structure
+Cam Moore
+Collaborative Software Development Laboratory, University of Hawaii, Manoa
 
-We have a common file structure we use across all of our Meteor apps. Client-only files are stored in the `client` directory, server-only files are stored in the `server` directory, and shared files are stored in the `both` directory. The `private` and `public` directories are for either private or public assets. 
+## License
 
-## <a name="bootstrap-and-less"></a> Bootstrap and LESS
+Copyright (c) 2015 CSDL, Cam Moore
 
-The majority of Bootstrap can be customized with LESS variables. If you look in `client/stylesheets/base/lib/bootstrap/variables.import.less` you will see a slew of configuration variables that can be tweaked to drastically change the look and feel of your site without having to write a single line of CSS.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-However we should avoid modifying the core Bootstrap Less files (in case we want to update them later), and should instead override the variables in our own LESS files.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-For example, to change the color of all primary buttons and links, simply add a `@brand-primary` variable to `stylesheets/base/variables.import.less`:
-
-```less
-// variables.import.less
-@brand-primary: #DC681D;
-```
-
-If you'd like to override a feature of Bootstrap that can't be modified using variables, simply create a new file in the `client/stylesheets/components` directory named after the corresponding Bootstrap component (eg. `buttons` in this case), and make your changes there.
-
-```less
-// buttons.import.less
-.btn {
-  text-transform: uppercase;
-}
-```
-
-After your file is ready, you need to import it into `client/stylesheets/base/global.less`. So, you would add in this statement:
-```less
-@import '@{components}/buttons.import.less';
-```
-
-The reason that this is done is to avoid any issues when the LESS files are compiled into CSS. That way, if one component relies on another or you want a certain order for your components, you can avoid any issues.
-
-## <a name="seo"></a> SEO
-
-Page titles, meta descriptions and Facebook and Twitter meta tags are handled by the [yasinuslu:blaze-meta](https://github.com/yasinuslu/blaze-meta) package. Global settings are configured in `both/router/meta.js`, while individual page settings are set at the controller level.
-
-* Note: the `spiderable` package will need to be installed and configured on your server in order for bots to read your meta tags.
-
-```javascript
-PostsShowController = AppController.extend({
-  path: '/posts/:_id',
-  waitOn: function() {
-    return this.subscribe('post', params._id);
-  },
-  data: function() {
-    return {
-      post: Post.find({_id: params._id})
-    };
-  },
-  onAfterAction: function() {
-    if(this.ready()) {
-      Meta.setTitle(this.data().post.title);
-    }
-  }
-});
-```
-
-## <a name="favicons-and-touch-icons"></a> Favicons and Touch Icons
-
-Upload your image to http://realfavicongenerator.net/ and place the resulting images in `public/images/favicons`
-
-## Seed Data
-
-You can use the [dburles:factory](https://github.com/percolatestudio/meteor-factory) and [anti:fake](https://github.com/anticoders/meteor-fake/) packages to generate fake collection data for testing your UI. See `server/seeds.js` for an example:
-
-```javascript
-Meteor.startup(function() {
-
-  Factory.define('item', Items, {
-    name: function() { return Fake.sentence(); },
-    rating: function() { return _.random(1, 5); }
-  });
-
-  if (Items.find({}).count() === 0) {
-
-    _(10).times(function(n) {
-      Factory.create('item');
-    });
-
-  }
-
-});
-
-```
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
