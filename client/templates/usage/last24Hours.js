@@ -54,48 +54,35 @@ function updateBarChart(records, towerId) {
     for (i = 0; i < limit; i++) {
       var item = {};
       item.x = records[i].date;
-      item.y = records[i].value;
+      item.y = records[i].value / 1000;
+      item.group = 0;
       items.push(item);
     }
     //console.log(items);
+    var groups = new vis.DataSet();
     var dataset = new vis.DataSet(items);
+    groups.add({
+      id: 0,
+      content: 'Bargraph',
+      options: {
+        style:'bar',
+        drawPoints: false
+      }});
     var options = {
-      style: 'bar',
-      barChart: {width: Math.floor(barWidth), align: 'center'}, // align: left, center, right
-      drawPoints: false,
+      //barChart: {width: Math.floor(barWidth), align: 'center'}, // align: left, center, right
       dataAxis: {
-        icons: true,
-        range: {
-          max: 22000,
-          min: 0
-        },
-        format: function (value) {
-          var reduced = value / 1000;
-          return reduced + " kW";
-        },
+        icons: false,
+        visible: true,
+        showMajorLabels: true,
+        showMinorLabels: false,
         left: {
-          format: function (value) {
-            var reduced = value / 1000;
-            return reduced + " kW";
-          },
-          range: {
-            max: 22000,
-            min: 0
-          },
-        },
-        right: {
-          format: function (value) {
-            var reduced = value / 1000;
-            return reduced + " kW";
-          },
-          range: {
-            max: 22000,
-            min: 0
-          },
+          title: {
+            text: "kWh"
+          }
         }
       },
       orientation: 'top'
     };
-    new vis.Graph2d(container, items, options);
+    var graph = new vis.Graph2d(container, items, groups, options);
   }
 }

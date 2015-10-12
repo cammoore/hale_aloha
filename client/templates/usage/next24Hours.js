@@ -1,5 +1,7 @@
 Template.next24Hours.helpers({
-  //add you helpers here
+  capitalize: function (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 });
 
 Template.next24Hours.events({
@@ -106,7 +108,7 @@ function predictNext24HoursEnergy(towerId) {
     .call(chart.width(x.rangeBand()));
 
 
-  var title = towerId + " expected energy usage";
+  var title = capitalize(towerId) + " expected energy usage";
   // add a title
   svg.append("text")
     .attr("x", (width / 2))
@@ -155,4 +157,8 @@ function iqr(k) {
     while (d[--j] > q3 + iqr);
     return [i, j];
   };
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }

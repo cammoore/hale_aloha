@@ -9,17 +9,17 @@
           <li role="presentation"><a href="#{{tower}}30days" data-toggle="tab">Last 30 days</a></li>
         </ul>
         <div class="tab-content">
-          <div id="{{tower}}24hours" class="tab-pane active">{{tower}}'s energy use for the last 24 hours.
+          <div id="{{tower}}24hours" class="tab-pane active"><strong>{{capitalize tower}}'s energy use for the last 24 hours in kWh.</strong>
             <div id="{{tower}}last24_chart">
               {{> last24Hours towerId=tower }}
             </div>
           </div>
-          <div id="{{tower}}7days" class="tab-pane">{{tower}}'s energy use for the last 7 days.
+          <div id="{{tower}}7days" class="tab-pane"><strong>{{capitalize tower}}'s energy use for the last 7 days in kWh.</strong>
             <div id="{{tower}}last7_chart">
               {{> last7Days towerId=tower }}
             </div>
           </div>
-          <div id="{{tower}}30days" class="tab-pane">{{tower}}'s energy use for the last 30 days.
+          <div id="{{tower}}30days" class="tab-pane"><strong>{{capitalize tower}}'s energy use for the last 30 days in kWh.</strong>
             <div id="{{tower}}last30_chart">
               {{> last30Days towerId=tower }}
             </div>

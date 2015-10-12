@@ -45,7 +45,7 @@ function updateBarChart(records, towerId) {
     for (i = 0; i < limit; i++) {
       var item = {};
       item.x = records[i].date;
-      item.y = records[i].value;
+      item.y = records[i].value / 1000;
       items.push(item);
     }
     //console.log(items);
@@ -55,40 +55,14 @@ function updateBarChart(records, towerId) {
       barChart: {width: Math.floor(barWidth), align: 'center'}, // align: left, center, right
       drawPoints: false,
       dataAxis: {
-        icons: true,
+        icons: false,
         visible: true,
         showMajorLabels: true,
         showMinorLabels: false,
-        range: {
-          max: 22000,
-          min: 0
-        },
-        format: function (value) {
-          var reduced = value / 1000;
-          return reduced;
-        },
         left: {
           title: {
-            text: "KiloWatts"
-          },
-          format: function (value) {
-            var reduced = value / 1000;
-            return reduced;
-          },
-          range: {
-            max: 22000,
-            min: 0
-          },
-        },
-        right: {
-          format: function (value) {
-            var reduced = value / 1000;
-            return reduced;
-          },
-          range: {
-            max: 22000,
-            min: 0
-          },
+            text: "kWh"
+          }
         }
       },
       orientation: 'top'

@@ -22,7 +22,6 @@ yasinuslu:blaze-meta
 aldeed:collection2
 aldeed:autoform
 d3
-jorisbontje:vis
 useraccounts:iron-routing
 atoy40:accounts-cas
 standard-minifiers
@@ -39,3 +38,4 @@ random
 ejson
 spacebars
 check
+jorisbontje:vis
