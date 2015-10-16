@@ -8,27 +8,23 @@ The Hale Aloha Energy Dashboard consists of three components.
   
 ## Installation
 
-TODO: Describe the installation process
+The Hale Aloha Dashboard must be run on the same machine as the Hale Aloha Data Bridge.
 
-## Usage
-
-TODO: Write usage instructions
-
-## Contributing
-
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+1. Install Meteor, http://www.meteor.com/
+2. Install MongoDB, http://www.mongodb.org/, and run the MongoDB daemon. Note the port number that the database is listening to.
+3. Clone the Hale Aloha Energy Dashboard, https://github.com/wattdepot/hale_aloha_dashboard.git
+4. cd to the `hale_aloha_dashboard` directory.
+5. Edit the `settings.json` file to point to the CAS server you are using for authentication.  On Mopsa it should point to https://authn.hawaii.edu/cas/.
+6. Edit the `start-dashboard.sh` script, setting the `MONGO_URL` to point to the running MongoDB. Make sure the `ROOT_URL` points to the machine you are running the dashboard on.  Make sure the last line will run Meteor on the right port.
 
 ## History
 
-TODO: Write history
+2015-10-15: Release 1.0.
 
 ## Credits
 
 Cam Moore
+
 Collaborative Software Development Laboratory, University of Hawaii, Manoa
 
 ## License
