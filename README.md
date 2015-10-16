@@ -3,7 +3,7 @@
 The Hale Aloha Energy Dashboard consists of three components.
 
   1. This Meteor Application
-  2. A Java data bridge applications
+  2. A Java data bridge application. See [hale_aloha_dashboard_data_bridge](https://github.com/wattdepot/hale_aloha_dashboard_data_bridge)
   3. The [WattDepot energy system](http://wattdepot.org) monitoring the Hale Aloha dorms.
   
 ## Installation
