@@ -7,9 +7,9 @@ Template.powerMeter.helpers({
       limit: 1
     }).fetch();
     //console.log("initPowerUpdate");
-    var cur = Math.floor(current[0].value);
-    var min = Math.floor(current[0].minimum);
-    var max = Math.floor(current[0].maximum);
+    var cur = parseFloat(Math.round(current[0].value / 10) / 100).toFixed(2);
+    var min = parseFloat(Math.round(current[0].minimum / 10) / 100).toFixed(2);
+    var max = parseFloat(Math.round(current[0].maximum / 10) / 100).toFixed(2);
     if (cur < min) {
       min = cur * 0.8;
     }
@@ -24,7 +24,7 @@ Template.powerMeter.helpers({
           value: cur,
           min: min,
           max: max,
-          title: "Current Power (W)",
+          title: "Current Power (kW)",
           refreshAnimationTime: 1
         });
       }
@@ -38,7 +38,7 @@ Template.powerMeter.helpers({
             value: cur,
             min: min,
             max: max,
-            title: "Current Power (W)",
+            title: "Current Power (kW)",
             refreshAnimationTime: 1
           });
         }
@@ -54,7 +54,7 @@ Template.powerMeter.helpers({
             value: cur,
             min: min,
             max: max,
-            title: "Current Power (W)",
+            title: "Current Power (kW)",
             refreshAnimationTime: 1
           });
         }
@@ -70,7 +70,7 @@ Template.powerMeter.helpers({
             value: cur,
             min: min,
             max: max,
-            title: "Current Power (W)",
+            title: "Current Power (kW)",
             refreshAnimationTime: 1
           });
         }
@@ -82,13 +82,13 @@ Template.powerMeter.helpers({
       sort: {createdAt: -1},
       limit: 1
     }).fetch();
-    var min = current[0].minimum;
-    var cur = current[0].value;
+    var cur = parseFloat(Math.round(current[0].value / 10) / 100).toFixed(2);
+    var min = parseFloat(Math.round(current[0].minimum / 10) / 100).toFixed(2);
     if (min < cur) {
-      return Math.floor(min);
+      return min;
     }
     else {
-      return Math.floor(cur - (.100 * cur));
+      return parseFloat(cur - (.100 * cur)).toFixed(2);
     }
   },
   maxPowerValue: function (towerId) {
@@ -96,13 +96,13 @@ Template.powerMeter.helpers({
       sort: {createdAt: -1},
       limit: 1
     }).fetch();
-    var max = current[0].maximum;
-    var cur = current[0].value;
+    var cur = parseFloat(Math.round(current[0].value / 10) / 100).toFixed(2);
+    var max = parseFloat(Math.round(current[0].maximum / 10) / 100).toFixed(2);
     if (max > cur) {
-      return Math.floor(max);
+      return max;
     }
     else {
-      return Math.floor(cur + (0.1 * cur));
+      return parseFloat(cur + (0.1 * cur)).toFixed(2);
     }
   },
   avePowerValue: function (towerId) {
@@ -111,7 +111,7 @@ Template.powerMeter.helpers({
       limit: 1
     }).fetch();
     //console.log(current);
-    return Math.floor(current[0].average);
+    return parseFloat(Math.round(current[0].average / 10) / 100).toFixed(2);
   },
   asOf: function (towerId) {
     var current = Power.find({"tower": towerId, "lounge": {$exists: false}}, {
@@ -164,9 +164,9 @@ Template.powerMeter.onRendered(function () {
     limit: 1
   }).fetch();
   var numReporting = current[0].reporting;
-  var cur = Math.floor(current[0].value);
-  var min = Math.floor(current[0].minimum);
-  var max = Math.floor(current[0].maximum);
+  var cur = parseFloat(Math.round(current[0].value / 10) / 100).toFixed(2);
+  var min = parseFloat(Math.round(current[0].minimum / 10) / 100).toFixed(2);
+  var max = parseFloat(Math.round(current[0].maximum / 10) / 100).toFixed(2);
   if (cur < min) {
     min = cur * 0.8;
   }
@@ -180,7 +180,7 @@ Template.powerMeter.onRendered(function () {
       value: cur,
       min: min,
       max: max,
-      title: "Current Power (W)",
+      title: "Current Power (kW)",
       refreshAnimationTime: 1
     });
     if (numReporting === 10) {
@@ -199,7 +199,7 @@ Template.powerMeter.onRendered(function () {
       value: cur,
       min: min,
       max: max,
-      title: "Current Power (W)",
+      title: "Current Power (kW)",
       refreshAnimationTime: 1
     });
     if (numReporting === 10) {
@@ -218,7 +218,7 @@ Template.powerMeter.onRendered(function () {
       value: cur,
       min: min,
       max: max,
-      title: "Current Power (W)",
+      title: "Current Power (kW)",
       refreshAnimationTime: 1
     });
     if (numReporting === 10) {
@@ -237,7 +237,7 @@ Template.powerMeter.onRendered(function () {
       value: cur,
       min: min,
       max: max,
-      title: "Current Power (W)",
+      title: "Current Power (kW)",
       refreshAnimationTime: 1
     });
     if (numReporting === 10) {

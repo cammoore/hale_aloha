@@ -1,7 +1,7 @@
 Template.last7Days.helpers({
   byTower: function (towerId) {
     //console.log("byTower " + towerId);
-    var records = Daily.find({"tower": towerId, "lounge": {$exists: false}}, {fields: {value: 1, date: 1}}, {sort: {date: -1}}).fetch();
+    var records = Daily.find({"tower": towerId}, {sort: {date: -1}}).fetch();
     updateBarChart(records, towerId);
 
   },
@@ -22,7 +22,7 @@ Template.last7Days.onCreated(function () {
 Template.last7Days.onRendered(function () {
   //console.log("onRendered");
   var towerId = this.data.towerId;
-  var records = Daily.find({"tower": towerId, "lounge": {$exists: false}}, {fields: {value: 1, date: 1}}, {sort: {date: -1}}).fetch();
+  var records = Daily.find({"tower": towerId}, {sort: {date: -1}}).fetch();
   //console.log(records[0]);
   updateBarChart(records, towerId);
 });
@@ -37,8 +37,11 @@ function updateBarChart(records, towerId) {
     var barWidth = document.getElementById(towerId).clientWidth / 12;
     var items = [];
     var i;
-    var limit = records.length - 8;
-    for (i = records.length - 1; i > limit; i--) {
+    var limit = records.length;
+    if (limit > 7) {
+      limit = 7;
+    }
+    for (i = 0; i < limit; i++) {
       var item = {};
       item.x = records[i].date;
       item.y = records[i].value / 1000;
