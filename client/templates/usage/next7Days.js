@@ -35,7 +35,7 @@ function predictNext7DaysEnergy(towerId) {
   var min = Infinity,
       max = -Infinity;
   var records = PredictedDaily.find({tower: towerId}, {sort: {createdAt: 1}}).fetch();
-  var numRecords = records.length - 1;
+  var numRecords = records.length;
 
   //console.log(numRecords);
   // parse in the data

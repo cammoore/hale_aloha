@@ -35,7 +35,7 @@ function predictNext24HoursEnergy(towerId) {
   var min = Infinity,
     max = -Infinity;
   var records = PredictedHourly.find({tower: towerId}, {sort: {createdAt: 1}}).fetch();
-  var numRecords = records.length - 1;
+  var numRecords = records.length;
 
   // parse in the data
   var data = [];
