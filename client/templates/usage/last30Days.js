@@ -1,7 +1,7 @@
 Template.last30Days.helpers({
   //add you helpers here
   byTower: function (towerId) {
-    var records = Daily.find({"tower": towerId}, {fields: {value: 1, date: 1}}, {sort: {date: -1}}).fetch();
+    var records = Daily.find({"tower": towerId}, {fields: {value: 1, date: 1}, sort: {date: -1}}).fetch();
     //console.log(records);
     updateBarChart(records, towerId);
   },
@@ -22,7 +22,7 @@ Template.last30Days.onCreated(function () {
 Template.last30Days.onRendered(function () {
   var towerId = this.data.towerId;
   //console.log(towerId);
-  var records = Daily.find({"tower": towerId}, {fields: {value: 1, date: 1}}, {sort: {date: -1}}).fetch();
+  var records = Daily.find({"tower": towerId}, {fields: {value: 1, date: 1}, sort: {date: -1}}).fetch();
   //console.log(records);
   updateBarChart(records, towerId);
 });

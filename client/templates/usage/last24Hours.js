@@ -29,7 +29,7 @@ Template.last24Hours.onRendered(function () {
   //console.log("last24.onRendered");
   var towerId = this.data.towerId;
   //console.log(towerId);
-  var records = Hourly.find({"tower": towerId, "lounge": {$exists: false}}, {sort: {date: -1}}).fetch();
+  var records = Hourly.find({"tower": towerId}, {sort: {date: -1}}).fetch();
   //console.log(records);
   updateBarChart(records, towerId);
 });
