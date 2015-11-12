@@ -1,5 +1,6 @@
 PowerController = AppController.extend({
   waitOn: function() {
+    //console.log("PowerControler waitOn");
     return this.subscribe('power');
   },
   data: {

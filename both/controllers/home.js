@@ -1,12 +1,7 @@
 HomeController = AppController.extend({
-  waitOn: function() {
-    return this.subscribe('daily');
-  },
-  data: {
-    daily: Daily.find({})
-  },
   onAfterAction: function () {
-    Meta.setTitle('Hale Aloha');
+    //console.log("home.onAfterAction");
+    Meta.setTitle('Welcome');
   }
 });
 

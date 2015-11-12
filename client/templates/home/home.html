@@ -1,19 +1,19 @@
-  <template name="home">
+<template name="home">
   {{#if loggedIn }}
-    {{goToPower}}
-    {{else}}
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <div class="at-title">
-            <h3>Please Sign In</h3>
-          </div>
-          <div class="at-error alert alert-danger">
-            <p>Not signed in</p>
-
-            <p>{{errors}}</p>
-          </div>
-          <button class="at-btn btn btn-lg btn-block btn-default" onclick="casLogin();">Sign In</button>
-        </div>
+  {{goToPower}}
+  {{else}}
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="at-title">
+        <h3>Please Sign In</h3>
       </div>
-    {{/if}}
-    </template>
+      <div class="at-error alert alert-danger">
+        <p>Not signed in</p>
+
+        <p>{{errors}}</p>
+      </div>
+      <button class="at-btn btn btn-lg btn-block btn-default" onclick="casLogin();">Sign In</button>
+    </div>
+  </div>
+  {{/if}}
+</template>

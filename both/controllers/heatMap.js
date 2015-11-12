@@ -1,12 +1,12 @@
 HeatMapController = AppController.extend({
   waitOn: function() {
-    return this.subscribe('daily');
-  },
-  data: {
-    daily: Daily.find({})
-  },
-  onAfterAction: function () {
-    Meta.setTitle('Heat Map');
+  //  return this.subscribe('daily');
+  //},
+  //data: {
+  //  daily: Daily.find({})
+  //},
+  //onAfterAction: function () {
+  //  Meta.setTitle('Heat Map');
   }
 });
 

@@ -1,11 +1,11 @@
 FutureUsageController = AppController.extend({
-  waitOn: function() {
-    return this.subscribe('daily');
+  waitOn: function () {
+    return ([this.subscribe("predictedDaily"),
+      this.subscribe("predictedHourly")]);
   },
-  data: {
-  },
+  data: {},
   onAfterAction: function () {
-    Meta.setTitle('Future Usage');
+    Meta.setTitle('Future Energy');
   }
 });
 

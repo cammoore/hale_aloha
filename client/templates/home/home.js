@@ -1,5 +1,4 @@
 Template.home.helpers({
-  //add you helpers here
   loggedIn: function() {
     var user = Meteor.user();
     if (user) {

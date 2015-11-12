@@ -1,11 +1,12 @@
 PastUsageController = AppController.extend({
   waitOn: function() {
-    return this.subscribe('daily');
+    return ([this.subscribe('daily'),
+        this.subscribe('hourly')]);
   },
   data: {
   },
   onAfterAction: function () {
-    Meta.setTitle('Past Usage');
+    Meta.setTitle('Past Energy');
   }
 });
 
